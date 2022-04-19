@@ -1,21 +1,23 @@
+
+# COPYRIGHT STATEMENT
+this extension is originated by the project below
+
+https://github.com/JoeyLu93/vscode-fuzzy-tag
+https://marketplace.visualstudio.com/items?itemName=joeylu-vscode.fuzzy-tag
+
 # README
 
-support fuzzy search for tags.
-
+search any filename or symbol so fast.
 ## Features
-
-"C++ Intellisense" is a very useful extension based on gtags.
-However, it doesn't support fuzzy C/C++ tag search, which is a pity.
-Refer to others' thoughts, a "fuzzy tag" extension is developed to provide a feature of fuzzy tag search based on GNU global gtags.
-
-**Enjoy~**
 
 -----------------------------------------------------------------------------------------------------------
 
 KeyBinding: F10
 
-Setting:
-    fuzzy-tag.autoUpdate: Whether Gtags should update automatically or not when saving file. (default: false)
+Setting: 
+```
+fuzzy-tag.autoUpdate: Whether Gtags should update automatically or not when saving file. (default: false)
+```
 
 -----------------------------------------------------------------------------------------------------------
 
@@ -38,12 +40,3 @@ Demo:
 3. Chinese characters CANNOT be included in the workspace path.
 
 -----------------------------------------------------------------------------------------------------------
-
-### 0.0.3
-
-Support smart case. 
-For example, your input "abc" can match tags "abc" and "ABC", but input "Abc" will only match tag "ABC".
-
-### 0.0.5
-
-Fix a path bug on Mac OS.
