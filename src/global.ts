@@ -1,15 +1,20 @@
+import { time } from 'console';
 import * as vscode from 'vscode';
 var exec = require('child-process-promise').exec;
 
 function execute(command: string): Promise<Buffer> {
+    var configuration = vscode.workspace.getConfiguration('gtags-search');
+    var timeOutInMs = configuration.get('timeOutInMs', 3100);
+    console.log("timeout", timeOutInMs);
     return exec(command, {
         cwd: vscode.workspace.rootPath,
         encoding: 'utf8',
-        maxBuffer: 10 * 1024 * 1024
+        maxBuffer: 10 * 1024 * 1024,
+        timeout: timeOutInMs
     }).then(function (result: { stdout: Buffer; }): Buffer {
         return result.stdout;
-    }).fail(function (error: string) {
-        console.error("Error: " + error);
+    }).fail(function (result: { stdout: Buffer; }) {
+        return result.stdout;
     }).progress(function () {
         console.log("Command: " + command + " at ", vscode.workspace.rootPath);
     });

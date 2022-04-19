@@ -3,7 +3,7 @@
     "displayName": "gtags-search For C/C++",
     "description": "search based on Gtags",
     "icon": "",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "publisher": "gtags-search",
     "engines": {
         "vscode": "^1.26.0"
@@ -38,7 +38,18 @@
                     "type": "boolean",
                     "default": false,
                     "description": "Whether Gtags should update automatically or not when saving file. (default: false)"
+                },
+                "gtags-search.timeOutInMs": {
+                    "type": "integer",
+                    "default": 3000,
+                    "description": "search timeout in ms"
+                },
+                "gtags-search.MaxShowNum": {
+                    "type": "integer",
+                    "default": 50,
+                    "description": ""
                 }
+
             }
         }
     },
