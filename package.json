@@ -4,7 +4,7 @@
     "description": "search based on Gtags",
     "icon": "",
     "version": "0.0.1",
-    "publisher": "fy",
+    "publisher": "gtags-search",
     "engines": {
         "vscode": "^1.26.0"
     },

@@ -12,7 +12,7 @@ search any filename or symbol so fast.
 
 -----------------------------------------------------------------------------------------------------------
 
-KeyBinding: F10
+KeyBinding: alt + space
 
 Setting: 
 ```
