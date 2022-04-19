@@ -24,7 +24,7 @@ export class Global {
     }
 
     updateTags() {
-        var configuration = vscode.workspace.getConfiguration('fuzzy-tag');
+        var configuration = vscode.workspace.getConfiguration('gtags-search');
         var shouldupdate = configuration.get<boolean>('autoUpdate', true);
 
         if (shouldupdate) {

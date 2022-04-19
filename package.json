@@ -1,10 +1,10 @@
 {
-    "name": "fuzzy-tag",
-    "displayName": "Fuzzy Tag For C/C++",
-    "description": "Fuzzy tag search based on Gtags",
-    "icon": "images/icon.png",
-    "version": "0.0.3",
-    "publisher": "joeylu-vscode",
+    "name": "gtags-search",
+    "displayName": "gtags-search For C/C++",
+    "description": "search based on Gtags",
+    "icon": "",
+    "version": "0.0.1",
+    "publisher": "fy",
     "engines": {
         "vscode": "^1.26.0"
     },
@@ -14,27 +14,27 @@
     "activationEvents": [
         "onLanguage:cpp",
         "onLanguage:c",
-        "onCommand:extension.fuzzyTag"
+        "onCommand:extension.gtags-search"
     ],
     "main": "./out/extension.js",
     "contributes": {
         "commands": [
             {
-                "command": "extension.fuzzyTag",
-                "title": "fuzzyTag"
+                "command": "extension.gtags-search",
+                "title": "gtags-search"
             }
         ],
         "keybindings": [
             {
-                "command": "extension.fuzzyTag",
-                "key": "f10"
+                "command": "extension.gtags-search",
+                "key": "alt+space"
             }
         ],
         "configuration": {
             "type": "object",
-            "title": "Fuzzy tag",
+            "title": "gtags-search",
             "properties": {
-                "fuzzy-tag.autoUpdate": {
+                "gtags-search.autoUpdate": {
                     "type": "boolean",
                     "default": false,
                     "description": "Whether Gtags should update automatically or not when saving file. (default: false)"
@@ -61,6 +61,6 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/JoeyLu93/vscode-fuzzy-tag"
+        "url": "https://github.com/zhangfy321/gtag-search"
     }
 }

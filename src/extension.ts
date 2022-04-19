@@ -9,7 +9,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     console.log('Congratulations, your extension "fuzzy" is now active!');
 
-    vscode.commands.registerCommand("extension.fuzzyTag", fuzzySearch);
+    vscode.commands.registerCommand("extension.gtags-search", fuzzySearch);
     vscode.workspace.onDidSaveTextDocument(() => global.updateTags());
 }
 
