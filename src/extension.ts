@@ -9,7 +9,23 @@ export function activate(context: vscode.ExtensionContext) {
 
     console.log('Congratulations, your extension is now active!');
     vscode.commands.registerCommand("extension.gtags-search", Search);
+    vscode.commands.registerCommand("extension.gtags-search-update", ManualUpdate);
     vscode.workspace.onDidSaveTextDocument(() => global.updateTags());
+}
+
+async function ManualUpdate() {
+    Window.withProgress({ location: vscode.ProgressLocation.Notification, title: 'gtags-search is updating index, please wait...' },
+        async (progress) => {
+            return await global.update();
+        }).then((data) => {
+            Window.showInformationMessage("update done " + data.toString());
+        });
+};
+
+function hasCapital(str: string) {
+    var result = str.match(/^.*[A-Z]+.*$/);
+    if (result == null) return false;
+    return true;
 }
 
 
@@ -43,9 +59,15 @@ async function Search() {
         Window.withProgress({ location: vscode.ProgressLocation.Notification, title: 'gtags-search is searching, please wait...' },
             async (progress) => {
                 if (!msg.startsWith("@")) {
-                    return await global.run(['global -iP "' + msg + '"']);
-                } else {
-                    return await global.run(['global -iax "' + msg.slice(1) + '"']);
+                    return await global.run(["global", " -iP ", msg]);
+                }
+                else {
+                    if (hasCapital(msg)) {
+                        return await global.run(["global", " -ax ", msg.slice(1)]);
+                    }
+                    else {
+                        return await global.run(["global", " -axi ", msg.slice(1)]);
+                    }
                 }
             }).then(async function (output) {
                 if (!msg.startsWith("@")) {
@@ -75,12 +97,8 @@ async function Search() {
                     }
                 }
                 else {
-                    var pattern = msg.slice(1);
-                    // 从global获取结果
-                    const output = await global.run(['global -iax "' + pattern + '"']);
                     try {
-                        var idx = 0;
-                        if (output != null && output.length > 0) {
+                        if (output != null && output.length > 0 && !output.toString().startsWith("timeout")) {
                             output.toString().split(/\r?\n/).slice(0, max).forEach(async function (value) {
                                 // 解析结果
                                 var result = global.parseLine(value);
@@ -133,7 +151,7 @@ async function Search() {
                             });
                         }
                         else {
-                            Window.showErrorMessage('no result');
+                            Window.showErrorMessage(output.toString());
                         }
                     }
                     catch (ex) {

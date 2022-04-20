@@ -3,7 +3,7 @@
     "displayName": "gtags-search For C/C++",
     "description": "search based on Gtags",
     "icon": "",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "publisher": "gtags-search",
     "engines": {
         "vscode": "^1.26.0"
@@ -14,7 +14,8 @@
     "activationEvents": [
         "onLanguage:cpp",
         "onLanguage:c",
-        "onCommand:extension.gtags-search"
+        "onCommand:extension.gtags-search",
+        "onCommand:extension.gtags-search-update"
     ],
     "main": "./out/extension.js",
     "contributes": {
@@ -22,12 +23,20 @@
             {
                 "command": "extension.gtags-search",
                 "title": "gtags-search"
+            },
+            {
+                "command": "extension.gtags-search-update",
+                "title": "gtags-search-update"
             }
         ],
         "keybindings": [
             {
                 "command": "extension.gtags-search",
                 "key": "alt+space"
+            },
+            {
+                "command": "extension.gtags-search-update",
+                "key": "ctrl+u"
             }
         ],
         "configuration": {

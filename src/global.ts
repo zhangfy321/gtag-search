@@ -1,31 +1,49 @@
 import { time } from 'console';
 import * as vscode from 'vscode';
 var exec = require('child-process-promise').exec;
+var spawn = require('child-process-promise').spawn;
 
 function execute(command: string): Promise<Buffer> {
     var configuration = vscode.workspace.getConfiguration('gtags-search');
-    var timeOutInMs = configuration.get('timeOutInMs', 3100);
+    var timeOutInMs = configuration.get('timeOutInMs', 3000);
     console.log("timeout", timeOutInMs);
     return exec(command, {
         cwd: vscode.workspace.rootPath,
         encoding: 'utf8',
         maxBuffer: 10 * 1024 * 1024,
-        timeout: timeOutInMs
+        timeout: timeOutInMs,
     }).then(function (result: { stdout: Buffer; }): Buffer {
         return result.stdout;
-    }).fail(function (result: { stdout: Buffer; }) {
-        return result.stdout;
-    }).progress(function () {
+    }).fail(function (err: any) {
+        return "timeout"
+    }).progress(function (childProcess: any) {
         console.log("Command: " + command + " at ", vscode.workspace.rootPath);
     });
 }
 
+function executeNoTimeout(command: string): Promise<Buffer> {
+    return exec(command, {
+        cwd: vscode.workspace.rootPath,
+        encoding: 'utf8',
+        maxBuffer: 10 * 1024 * 1024,
+    }).then(function (result: { stdout: Buffer; }): Buffer {
+        return result.stdout;
+    }).fail(function (err: any) {
+        return "timeout"
+    }).progress(function (childProcess: any) {
+        console.log("Command: " + command + " at ", vscode.workspace.rootPath);
+    });
+}
 export class Global {
     updateInProgress: boolean = false; // 是否正在更新
     waitUpdate: boolean = false; // 是否有更新任务在等待执行
 
     run(params: string[]): Promise<Buffer> {
         return execute(params.join(' '));
+    }
+
+    runNoTimeout(params: string[]): Promise<Buffer> {
+        return executeNoTimeout(params.join(' '));
     }
 
     updateTags() {
@@ -49,6 +67,30 @@ export class Global {
                     self.updateTagsFinish();
                 });
             }
+        }
+    
+}
+    update() : Promise<Buffer> {
+        console.log("update now...");
+        
+        if (this.updateInProgress) {
+            console.log("wait update");
+            return new Promise(function(){
+                return Buffer.from("another update task is running...")
+            }); 
+        }
+        else
+        {
+            this.updateInProgress = true;
+            var self = this;
+
+            return this.runNoTimeout(['global -u']).then((data) => {
+                self.updateTagsFinish();
+                return data;
+            }).catch(()=>{
+                self.updateTagsFinish();
+                return Buffer.from("error");
+            })
         }
     }
 
