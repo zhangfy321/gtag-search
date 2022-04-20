@@ -6,13 +6,14 @@ var spawn = require('child-process-promise').spawn;
 function execute(command: string): Promise<Buffer> {
     var configuration = vscode.workspace.getConfiguration('gtags-search');
     var timeOutInMs = configuration.get('timeOutInMs', 3000);
-    console.log("timeout", timeOutInMs);
+    // console.log("timeout", timeOutInMs);
     return exec(command, {
         cwd: vscode.workspace.rootPath,
         encoding: 'utf8',
         maxBuffer: 10 * 1024 * 1024,
         timeout: timeOutInMs,
     }).then(function (result: { stdout: Buffer; }): Buffer {
+        console.log("succ: ", result.stdout.toString().length)
         return result.stdout;
     }).fail(function (err: any) {
         return "timeout"

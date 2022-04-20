@@ -3,7 +3,7 @@
     "displayName": "gtags-search For C/C++",
     "description": "search based on Gtags",
     "icon": "",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "publisher": "gtags-search",
     "engines": {
         "vscode": "^1.26.0"
@@ -32,7 +32,7 @@
         "keybindings": [
             {
                 "command": "extension.gtags-search",
-                "key": "alt+space"
+                "key": "shift shift"
             },
             {
                 "command": "extension.gtags-search-update",
@@ -55,7 +55,7 @@
                 },
                 "gtags-search.MaxShowNum": {
                     "type": "integer",
-                    "default": 50,
+                    "default": 60,
                     "description": ""
                 }
 

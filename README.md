@@ -1,10 +1,3 @@
-
-# COPYRIGHT STATEMENT
-this extension is originated by the project below
-
-https://github.com/JoeyLu93/vscode-fuzzy-tag
-https://marketplace.visualstudio.com/items?itemName=joeylu-vscode.fuzzy-tag
-
 # README
 
 search any filename or symbol so fast.
@@ -14,11 +7,13 @@ search any filename or symbol so fast.
 
 KeyBinding: 
 
-- search: alt + space  
+- search: shift shift 
 - incremently-update: ctrl + u
 
 Setting: 
 - gtags-search.autoUpdate: Whether Gtags should update automatically or not when saving file. (default: false)
+- gtags-search.timeOutInMs: 
+- gtags-search.MaxShowNum: 
 
 Tips:
 if your gtags files are on HDD, case-ignore search may be slow,
