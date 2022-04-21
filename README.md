@@ -3,6 +3,8 @@
 search any filename or symbol so fast.
 ## Features
 
+
+![image](https://raw.githubusercontent.com/zhangfy321/gtag-search/master/images/demo.gif)
 -----------------------------------------------------------------------------------------------------------
 
 KeyBinding: 
