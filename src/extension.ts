@@ -121,12 +121,19 @@ async function Search() {
         else 
         {
             var line = Number(location.get(item.label + item.description))
-            var options = {
-                selection: new vscode.Range(new vscode.Position(line, 0), new vscode.Position(line, 0)),
-                preview: false,
-            };
-
-            return Window.showTextDocument(vscode.Uri.file(item.description), options);
+            if (line)
+            {
+                var options = {
+                    selection: new vscode.Range(new vscode.Position(line, 0), new vscode.Position(line, 0)),
+                    preview: false,
+                };
+                return Window.showTextDocument(vscode.Uri.file(item.description), options);
+            }
+            else
+            {
+                return  Window.showTextDocument(vscode.Uri.file(long_pre_path + item.description), {preview: false});
+            }
+            
         }
     });
 
