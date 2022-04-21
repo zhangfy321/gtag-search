@@ -127,10 +127,13 @@ async function Search() {
                     selection: new vscode.Range(new vscode.Position(line, 0), new vscode.Position(line, 0)),
                     preview: false,
                 };
+                box.hide()
                 return Window.showTextDocument(vscode.Uri.file(item.description), options);
+                
             }
             else
             {
+                box.hide()
                 return  Window.showTextDocument(vscode.Uri.file(long_pre_path + item.description), {preview: false});
             }
             
